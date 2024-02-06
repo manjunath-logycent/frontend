@@ -4,9 +4,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Form, FormControl } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate =useNavigate();
   return (
     <Navbar
       expand="lg"
@@ -16,8 +17,7 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand>
-          <Link to="/">
-          Note Zipper</Link>
+          <Link to="/">Note Zipper</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -38,7 +38,14 @@ const Header = () => {
               <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
 
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+              <NavDropdown.Item
+                onClick={() => {
+                  localStorage.removeItem("userInfo");
+                  navigate('/')
+                }}
+              >
+                Log out
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
